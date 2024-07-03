@@ -1,0 +1,19 @@
+{
+    "title": "Fun Facts II",
+    "type": 2,
+    "question_text": "Kun je je de Fun Facts uit de vorige opdracht nog herinneren? Weet je ook nog, wat hun vertalingen waren? Nu gaat het erom dat je enkele woorden kunt vertalen.",
+    "sub_questions": ["Wat betekent 'Farben'?", "Wat betekent 'alt'?", "Wat betekent 'benannt'?", "Wat betekent 'wächst'?" ],
+    "hint": "Denk terug aan de algemene betekenis van de zinnen. Let op, dat de woorden bij de betekenis van de zin passen.  Ga te werk via het uitsluitingsproces: Welke antwoordmogelijkheden passen eigenlijk beter bij de andere woorden in de zin?",
+    "strategy": "Ga te werk via het uitsluitingsproces: Welke antwoordmogelijkheden passen eigenlijk beter bij de andere woorden in de zin? ",
+    "language": "Duits",
+    "material_type": "image",
+    "material": ["Fun_Facts_II.png"] ,
+    "difficulty": "gem",
+    "options": [
+        ["kleuren", "fabelen", "vlag"], 
+        ["kat", "geluid", "oud"], 
+        ["benoemd", "persoon", "beveiligd"],
+        ["wacht", "groeit", "duurt"]
+    ],
+    "solution": ["1-a", "2-c", "3-a", "4-b"]
+}

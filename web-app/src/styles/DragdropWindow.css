@@ -1,0 +1,129 @@
+
+
+/*
+ * Copyright (c) 2024, MSDT group6
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of Radboud nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+
+
+.task-body{
+    vertical-align: middle;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.task-choices-header{
+    display: flex;
+    justify-content: center;
+    margin: 1% 10%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.task-question{
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+}
+
+.task-instructions{
+    size: 10px;
+    color: grey;
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+
+.task-columns{
+    margin: 1% 1%;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 10px;
+}
+
+.task-choice{
+    margin: 1% 1%;
+    padding: 1% 1%;
+    justify-content: center;
+    align-items: center;
+    cursor: grab;
+    display: flex;
+}
+
+.task-choice img{
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.task-choice:active{
+    opacity: 0.7;
+    border: 1px solid #111;
+}
+
+.task-column{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+    border-style: solid;
+    border-color: rgb(204, 204, 204);
+    border-radius: 16px;
+    border-width: 0.8px;
+    overflow: auto;
+    background-color: rgb(235, 233, 233);
+}
+
+.task-materials{
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+    border-style: solid;
+    border-color: rgb(204, 204, 204);
+    border-radius: 16px;
+    border-width: 0.8px;
+    background-color: rgb(235, 233, 233);
+}
+
+.task-header{
+    display: flex;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,16 @@
+{
+    "title": "Verkeersborden",
+    "type": 5,
+    "question_text": "Hier zie je drie verkeersborden met Arabische opmerkingen. De borden ken je waarschijnlijk ook (ongeveer) zo uit Nederland. Wat kan de tekst op de borden betekenen? Wijs de juiste antwoorden aan de borden toe.",
+    "hint": "Om deze opdracht op te lossen, hoef je het Arabische schrift niet te kunnen lezen. Concentreer je meer op de borden.",
+    "strategy": "Concentreer je op de betekenis van de borden. Wat betekenen ze in het verkeer?  ",
+    "language": "Arabisch",
+    "material_type": "image",
+    "material": ["Verkeersbordenstop.png", "Verkeersbordenafrit.png", "Verkeersbordenverbod.png"] ,
+    "difficulty": "mak",
+    "options": ["Inrijden niet toegestaan", 
+                "Stop!",
+                "Afrit"], 
+    "solution": [2, 3, 1],
+    "old_solution": ["1-b", "2-c", "3-a"]
+  }

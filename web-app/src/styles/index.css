@@ -1,0 +1,173 @@
+
+
+/*
+ * Copyright (c) 2024, MSDT group6
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of Radboud nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+
+
+:root{
+  --light-purple: #9B5de5;
+  --dark-purple: #42147b;
+  --light-pink: #f58ecc;
+  --dark-pink: #f15bb5;
+  --light-yellow: #fee440;
+  --dark-yellow: #f5ab00;
+  --light-blue: #00bbf9;
+  --dark-blue: #005c7a;
+  --light-green: #85ffef;
+  --dark-green: #00f5d4;
+}
+
+@font-face {
+  font-family: 'Creat Display';
+  src: url('assets/fonts/CreatoDisplay-Regular.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ethereal';
+  src: url('assets/fonts/EtherealDemoFont-Regular.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Recoleta';
+  src: url('assets/fonts/Recoleta-Regular.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'CreatoDisplay', sans-serif;
+}
+
+body {
+  background: #f5f5f5;
+  font-family: 'CreatoDisplay', sans-serif;
+  height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.container {
+  padding: 30px 0px;
+  height: auto;
+}
+
+.page{
+  height: auto;
+}
+
+ #root{
+  display: flex;
+  flex-direction: column; /* Stacks children in a column */
+  /*align-items: flex-start;  Aligns children to the start (left) horizontally */
+  justify-content: flex-start; /* Aligns children to the start (top) vertically */
+  height: 100vh; /* Full viewport height */
+  width: 90vw;
+  padding-top: 100px;
+ }
+
+.page-header{
+  height: auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.page-body{
+  width: 100%;
+  display: flex;
+  align-items: top;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 20px 0px;
+}
+
+.button {
+  background-color: #9b5de5;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  width: fit-content;
+}
+
+.button:hover {
+  background-color: #873ee0;
+}
+
+.button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+code {
+  font-family: 'Recoleta',
+    monospace;
+}
+
+/* ----- media query ----- */
+
+@media (max-width: 550px){
+  .minigames{
+      flex-direction: column;
+  }
+  .minigame{
+      flex-basis: 100%;
+      margin: 20px;
+  }
+}
+/* @media (max-width: 300px){
+    .container{
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+
+    .button{
+      padding: 14px 22px;
+    }
+} */

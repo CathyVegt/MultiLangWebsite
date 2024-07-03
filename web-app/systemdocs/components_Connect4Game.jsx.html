@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>components/Connect4Game.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Connect4Game">Connect4Game</a></li><li><a href="global.html#DragdropWindow">DragdropWindow</a></li><li><a href="global.html#DropZone">DropZone</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#Logout">Logout</a></li><li><a href="global.html#Minigames">Minigames</a></li><li><a href="global.html#Navbar">Navbar</a></li><li><a href="global.html#NoPage">NoPage</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#Sidebar">Sidebar</a></li><li><a href="global.html#Slot">Slot</a></li><li><a href="global.html#adminPageView">adminPageView</a></li><li><a href="global.html#fetchExercise">fetchExercise</a></li><li><a href="global.html#fetchRandomExercise">fetchRandomExercise</a></li><li><a href="global.html#fetchTestExercise">fetchTestExercise</a></li><li><a href="global.html#scoresView">scoresView</a></li><li><a href="global.html#settingsView">settingsView</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">components/Connect4Game.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from "react"
+//import { Slot } from "./Slot"
+import redToken from '../assets/red token.svg';
+import blackToken from '../assets/black token.svg'
+import '../styles/Connect4Game.css'
+/**
+ * Slot component representing a single cell in the Connect 4 grid.
+ * 
+ * @param {string} ch - The character representing the played chip.
+ * @param {number} y - The row index of the slot.
+ * @param {number} x - The column index of the slot.
+ */
+const Slot = ({ ch, y, x }) => {
+
+    return (
+        &lt;div className='slot' x={x} y={y}>
+            {ch &amp;&amp; (
+                &lt;img src={ch === 'X' ? redToken : blackToken} width='100%' height='100%' alt='' />
+            )}
+        &lt;/div>
+    )
+}
+
+/**
+ * This function plays the game. 
+ * @returns if a player has won the game.
+ */
+const Connect4Game = () => {
+
+    const [board, setBoard] = useState([
+        ['', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '']
+    ]);
+
+    const [currPlayer, setCurrPlayer] = useState('X');
+    const [oppPlayer, setOppPlayer] = useState('O');
+    const [gameOver, setGameOver] = useState(false);
+
+    /**
+     * Checks if the current move results in a win for the specified player.
+     * @param {number} row The row index representing the played chip.
+     * @param {number} column The column index representing the played chip.
+     * @param {string} ch The character representing the played chip
+     * @returns if there is a winning situation in one of the four directions.
+     */
+    const checkWin = (row, column, ch) => {
+        // Define helper function to check for consecutive symbols in a particular direction
+        const checkDirection = (deltaRow, deltaColumn) => {
+            console.log('Direction:',deltaRow,deltaRow)
+            const consecutive = (r, c, dr, dc) => {
+                console.log('r',r, 'board.length',board.length,'c',c,'board[0].length',board[0].length)
+                if ((r &lt; 0 || r >= board.length || c &lt; 0 || c >= board[0].length || board[r][c] !== ch)) {
+                    return 1;
+                }
+                console.log('board[r][c]',board[r][c])
+                console.log('COUNT',1 + consecutive(r + dr, c + dc, dr, dc))
+                    return 1 + consecutive(r + dr, c + dc, dr, dc); // Recursively count consecutive symbols                
+            };
+    
+            // Check both directions (positive and negative) for consecutive symbols
+            console.log('input:',row,deltaRow)
+            const positiveConsecutive = consecutive(+row + deltaRow, +column + deltaColumn, deltaRow, deltaColumn);
+            const negativeConsecutive = consecutive(+row - deltaRow, +column - deltaColumn, -deltaRow, -deltaColumn);
+                        
+            
+            // If the total consecutive symbols in both directions (including the current position) is >= 4, return true
+            console.log('FINAL COUNT',positiveConsecutive + negativeConsecutive)
+            return positiveConsecutive + negativeConsecutive - 1 >= 4;
+        };
+    
+        // Check in all directions for winning condition
+        return (
+            checkDirection(1, 0) || // Vertical
+            checkDirection(0, 1) || // Horizontal
+            checkDirection(1, 1) || // Diagonal (bottom-right to top-left)
+            checkDirection(-1, 1)   // Diagonal (top-right to bottom-left)
+        );
+    };    
+
+    /**
+     * This places the chip move in the board.
+     * @param {number} row The row index representing the played chip.
+     * @param {number} column The column index representing the played chip.
+     * @param {string} ch The character representing the played chip
+     * @returns if this move won the game.
+     */
+    const updateBoard = (row, column, ch) => {
+        setBoard(prev => {
+            const boardCopy = [...prev];
+            boardCopy[row][column] = ch;
+            return boardCopy;
+        });
+        //var check_win = checkWin(row, column, ch);
+        return checkWin(row, column, ch);
+    };
+
+    /**
+    * Handles the click event on a slot in the Connect 4 game.
+    *
+    * @param {Object} e - The event object from the click event.
+    */
+    const handleClick = (e) => {
+        const column = e.target.getAttribute('x');
+        let row = board.findIndex((rowArr, index) => {
+            // Find the first row that is occupied or at the bottom of the board
+            return (rowArr[column] !== '' || (index === board.length - 1));
+        });
+        // Only go up one row if the slot is NOT at the bottom
+        if (row !== (board.length - 1)) row -= 1;
+        if (board[row][column] !== '') row -= 1;
+
+
+
+        setGameOver(updateBoard(row, column, currPlayer));
+
+
+        if (!gameOver) {
+            // Swap players
+            const currPlayerCopy = currPlayer;
+            setCurrPlayer(oppPlayer);
+            setOppPlayer(currPlayerCopy);
+        }
+
+    };
+
+    return (
+        &lt;div className="gameWindow">
+            {gameOver &amp;&amp; (
+                &lt;div className="gameState"> Game Over! {oppPlayer === 'X' ? 'Blue' : 'Orange'} Wins!&lt;/div>
+            )}
+            &lt;div className="playerDisplay">{currPlayer === 'X' ? 'Blue' : 'Orange'} Move&lt;/div>
+            &lt;div className="board" onClick={gameOver ? null : handleClick}>
+                {board.map((row, i) => {
+                    return row.map((ch, j) => &lt;Slot ch={ch} y={i} x={j} />);
+                })}
+            &lt;/div>
+        &lt;/div>
+    );
+}
+
+export default Connect4Game</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.3</a> on Mon Jun 17 2024 13:26:03 GMT+0200 (Central European Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

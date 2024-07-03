@@ -1,0 +1,12 @@
+{
+    "title": "Trekken",
+    "type": 3,
+    "question_text": "Kijk naar het aanwijzingsbord. Wat betekent het woord “Ziehen”? ",
+    "hint": "De uitgang „en“ wijst erop, om welke woordsoort het gaat. Wat denk jij: is “ziehen” een zelfstandig naamwoord, werkwoord of bijvoeglijk naamwoord? Het aanwijzingsbord staat op een deur.",
+    "strategy": "Het aanwijzingsbord staat op een deur.",
+    "language": "Duits",
+    "material_type": "image",
+    "material": ["Trekkendeurbord.png"],
+    "difficulty": "mak",
+    "solution": ["trekken"]
+  }

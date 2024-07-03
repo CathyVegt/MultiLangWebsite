@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>components/FetchExercise.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Connect4Game">Connect4Game</a></li><li><a href="global.html#DragdropWindow">DragdropWindow</a></li><li><a href="global.html#DropZone">DropZone</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#Logout">Logout</a></li><li><a href="global.html#Minigames">Minigames</a></li><li><a href="global.html#Navbar">Navbar</a></li><li><a href="global.html#NoPage">NoPage</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#Sidebar">Sidebar</a></li><li><a href="global.html#Slot">Slot</a></li><li><a href="global.html#adminPageView">adminPageView</a></li><li><a href="global.html#fetchExercise">fetchExercise</a></li><li><a href="global.html#fetchRandomExercise">fetchRandomExercise</a></li><li><a href="global.html#fetchTestExercise">fetchTestExercise</a></li><li><a href="global.html#scoresView">scoresView</a></li><li><a href="global.html#settingsView">settingsView</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">components/FetchExercise.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useEffect, useState } from 'react';
+
+/**
+ * Fetching an exercise from a certain path, this can either be the ones from PUBLIC folder (for testing) or from the server. 
+ * Where to fetch from is handled by the other functions that uses this as a function call to perform the actual fetching. 
+ * That is also the reason why this function is not exported. 
+ * @param {string} path - the path from which the function has to fetch the data. 
+ * @returns {object} {exercise, error, options}
+ * and error if the fetching was unsuccessfull. Other wise an exercise response in a .json format with the following attributes: 
+ *      - title (id, unique) - doesn't NEED to be displayed to a user, but is used for identifyin a question in the database
+ *      - type : number - indicating the type of question.
+ *      - question_text: [string] -  the question. 
+ *      - hint: string - The hint to be displayed.  
+ *      - strategy: string - The additional tip that is displayed when a question is previously answered incorrectly. 
+ *      - language: string - The language which the question is about 
+ *      - material_type: string - "image" or "text" which is used to determine if visual material has to be rendered. 
+ *      - material: [string], text if the material is textual, and an array with the names of the images used for the exercise.   
+ *      - difficulty: string - "mak", "gem", "moe" for the three difficulty levels. (a number might be better however.)
+ *      - options: [string]/null - a list of options for multiple choice and connect questions. null if it's an open question, because there are no options in that case. 
+ *      - solution: [string] - the solutions of the exercise, either singleton or multiple answers depending on the question. 
+ */
+function fetchExercise(path){
+    const [exercise, setExercise] = useState(null);
+    const [error, setError] = useState(null);
+    const [options, setOptions] = useState(null); 
+
+    /**
+     * Checks if the exercise has "options", if not the options are simply set to null.
+     * The only exercises that do not have the options are any exercise in the form of an "open" question, i.e. a question where the user has to input text as the answer. 
+     * The function is not exported, because it only has to be used internally. 
+     * @param {object} data - the data in a .json format that is returned by one of the fetching functions. 
+     */
+    function checkOptions(data){
+        if(data.options != null){setOptions(data.options)} 
+        else{setOptions(null)}
+    }
+
+    // useEffect neccessary to synchronize with external database
+    useEffect(() => {
+        const fetchExerciseFunc = async(path) => {
+            try{
+                // console.log('path', path)
+                const response = await fetch(path)
+
+                if (!response.ok){
+                    throw new Error('Network response was not ok')
+                }
+
+                // parse json file. 
+                const data = await response.json(); 
+                // console.log("Data", data)
+                setExercise(data)
+                setOptions(data.options || null);
+
+            }catch (error){
+                console.error('Error fetching exercise: ', error)
+                setError(error.message)
+            }
+        }
+
+        fetchExerciseFunc(path)
+
+    }, [path]);
+
+    return {exercise, error, options}
+}
+
+/**
+ * Fetches an exercise that exists in the public folder as a json file. This is mostly for testing purposes for rendering/front-end. 
+ * @param {number} type - a number denoting the exercise type. The following are possible: 
+ *      - 1: Multiple choice (single) 
+ *      - 2: Multiple choice (with subquestions) 
+ *      - 3: Open question (single answer) 
+ *      - 4: Open question (multiple answers to submit) 
+ *      - 5: Connecting prompts and answers  
+ * @returns {Object} {exercise, error, options} also see fetchExercise
+ */
+export function fetchTestExercise(type = null){
+    // check if the type is valid. 
+    if (type &lt; 1 || type > 5){
+        throw new Error("type number invalid, use a number in 1 - 5. You used", type)
+    }
+    // denotes the paths for the different exercise types. 
+    const exercise_types = {
+        1: "MultipleChoice.json",
+        2: "MultipleMultipleChoice.json",
+        3: "OpenQuestionSingle.json", 
+        4: "OpenQuestionMultiple.json",
+        5: "ConnectQuestion.json"
+    }
+    // console.log('type', exercise_types[type])
+
+    // Construct the path we'll need to fetch from 
+    let path = `/${exercise_types[type.toString()]}`;
+    // console.log('path', path)
+
+    return fetchExercise(path)
+}
+
+/**
+ * fetch a random exercise from the database, either of a certain difficulty, or a completely random one
+ * @param {string} difficulty - (optional) the difficulty of the question needed to fetch.  
+ * @returns {object} {exercise, error, options} of a random exercise also see fetchExercise
+ */
+export function fetchRandomExercise(difficulty=""){
+    const exerciseServerPath = 'http://localhost:3000/api/v1/exercises/' // modify if the server connection is modified.     
+    
+    // check if the difficulty is valid. 
+    if (difficulty != "moe" || difficulty != "mak" || difficulty != "gem"){
+        throw new Error("difficulty is invalid, should be either 'mak', 'gem', or 'moe'. You used: ", difficulty)
+    }
+    console.log("Difficulty: ", difficulty)
+    // Construct the path we'll need to fetch from 
+    let path = `${exerciseServerPath}random/${difficulty}`
+    console.log('path', path)
+
+    return fetchExercise(path)
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.3</a> on Mon Jun 17 2024 13:26:03 GMT+0200 (Central European Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

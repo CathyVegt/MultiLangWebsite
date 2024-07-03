@@ -1,0 +1,186 @@
+
+
+/*
+ * Copyright (c) 2024, MSDT group6
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of Radboud nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+
+
+.login-main{
+    display: flex;
+}
+.login-left{
+    flex-grow: 1;
+    height: 100vh;
+    background-color: #E9E9E9;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-left img{
+    width: 400px;
+}
+.login-right{
+    height: 100vh;
+    flex-grow: 1;
+}
+.login-right-container{
+    height: 100%;
+    width: 40%;
+    margin: 0 auto;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.login-right form{
+    display: flex;
+    flex-direction: column;
+}
+.login-logo{
+    align-self: center;
+    padding-top: 50px;
+}
+.login-center{
+    margin: auto 0;
+}
+.login-logo img{
+    width: 50px;
+}
+.login-center h2{
+    font-size: 35px;
+}
+.login-center{
+    text-align: center;
+}
+.login-center p{
+    font-weight: 400;
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+form input[type='password'],
+form input[type='text']
+{
+    width: 100%;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 0px;
+    border-bottom: 1px solid black;
+    outline: none;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+.pass-input-div{
+    position: relative;
+}
+.pass-input-div svg{
+    font-size: 20px;
+    position: absolute;
+    right: 10px;
+    bottom: 35px;
+    cursor: pointer;
+    outline: none;
+}
+form button[type='submit'] {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 30px;
+    font-weight: 600;
+}
+.login-center-options{
+    display: flex;
+    justify-content: space-between;
+}
+.remember-div{
+    display:flex;
+    align-items: center;
+    column-gap: 5px;
+}
+.remember-div label{
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 2px;
+}
+.forgot-pass-link{
+    text-decoration: none;
+    font-size: 13px;
+}
+.forgot-pass-link:hover{
+    text-decoration: underline;
+}
+.login-center-buttons{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+.login-center-buttons button:nth-child(1){
+    background: black;
+    color: white;
+    border: 3px solid black;
+    transition: background 1s linear 0ms;
+    transition: color 500ms linear 0ms;
+}
+.login-center-buttons button:nth-child(1):hover{
+    color: #333;
+    background-color: white;
+}
+.login-center-buttons button:nth-child(2){
+    background: #F0F0F0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+    transition: background 500ms linear 0ms;
+}
+.login-center-buttons button:nth-child(2) img{
+    width: 30px;
+}
+.login-center-buttons button:nth-child(2):hover{
+    background: #c4c4c4c2;
+}
+.login-bottom-p{
+    text-align: center;
+    font-size: 15px;
+    padding-bottom: 40px;
+}
+.login-bottom-p a{
+    text-decoration: none;
+    font-weight: 600;
+}
+.login-bottom-p a:hover{
+    text-decoration: underline;
+}

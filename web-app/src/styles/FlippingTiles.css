@@ -1,0 +1,164 @@
+
+
+/*
+ * Copyright (c) 2024, MSDT group6
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of Radboud nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #85ffef;
+}
+.containerFlippingTiles {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background: #85ffef;
+    padding: 20px 40px;
+}
+h2 {
+    font-size: 3em;
+    color: #FEF9EF;
+    text-transform: uppercase;
+    letter-spacing: 1.0em;
+}
+
+.game {
+    width: 440px;
+    height: 440px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    transform-style: preserve-3d;
+    perspective: 500px;
+}
+.player-turn-player1 {
+    font-size: 18px;
+    color: #bc729e;
+    font-weight: 600;
+}
+.player-turn-player2 {
+    font-size: 18px;
+    color: #207896;
+    font-weight: 600;
+}
+.itemTile {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    background: #FEF9EF;
+    transform: rotateY(180deg);
+    transition: 0.25s;
+}
+.itemTile.boxOpen {
+    transform: rotateY(0deg);
+}
+.itemTile::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(#9b5de5,#42147b);
+    transition: 0.25s;
+    transform: rotateY(0deg);
+    backface-visibility: hidden;
+}
+.boxOpen:after,
+.boxMatch:after {
+    transform: rotateY(180deg);
+}
+.scores p span {
+    font-size: 1.2em;
+}
+.player-color {
+    font-size: 18px;
+}
+#player1-color {
+    color: #bc729e;
+}
+#player2-color {
+    color: #207896;
+}
+.winner-message {
+    display: flex;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 40px;
+    background-color: white;
+    border: 2px solid #000;
+    text-align: center;
+    z-index: 1000;
+    line-height: 50px;
+    font-size: 18px;
+}
+.winner-message.winner-player1 {
+    color: #bc729e !important;
+}
+.winner-message.winner-player2 {
+    color: #207896 !important;
+}
+.winner-message.winner-tie {
+    color: #000 !important;
+}
+.overlay {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+.overlay.active {
+    display: flex;
+}
+
+

@@ -1,0 +1,16 @@
+{
+    "title": "Website",
+    "type": 1,
+    "question_text": "Wat kun je op deze website doen?",
+    "hint": "Welke soortgelijke websites ken je? Wat zegt dat over dit plaatje?",
+    "strategy": "Ook op de foute antwoordmogelijkheden kun je misschien via deze website uitkomen. Concentreer je dus op wat je ziet op het plaatje.",
+    "language": "Arabisch",
+    "material_type": "image",
+    "material": ["Websitevraagimage.png"],
+    "difficulty": "mak",
+    "options": ["Een treinkaartje kopen", 
+                "Een excursie boeken", 
+                "Een reisverbinding uitzoeken"],
+    "solution": ["c"] 
+  }
+  

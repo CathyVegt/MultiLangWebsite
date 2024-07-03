@@ -1,0 +1,113 @@
+
+
+/*
+ * Copyright (c) 2024, MSDT group6
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of Radboud nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background: #f0f0f0; /* Optional: background color to see the effect better */
+}
+
+.gameState {
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 2.5vw; /* Adjusted for responsiveness */
+  margin: 10px 0px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.gameWindow {
+  vertical-align: middle;
+}
+
+.playerDisplay {
+  font-family: sans-serif;
+  font-size: 2vw; /* Adjusted for responsiveness */
+  text-align: center;
+  margin: 10px 0px;
+}
+
+.board-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* Ensure the container takes the full height of the screen */
+}
+
+.board {
+  width: 80vh; /* Adjusted for responsiveness: 80% of the viewport height */
+  max-width: 80vw; /* Ensure it doesn't get too large on big screens */
+  height: 68.57vh; /* Maintain a 6:7 ratio for height to width */
+  max-height: 100vh; /* Ensure it doesn't get too large vertically */
+  padding: 20px; /* Simplified padding */
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 columns */
+  grid-template-rows: repeat(6, 1fr); /* 6 rows */
+  gap: 1vw; /* Adjusted for responsiveness */
+  background: #005C7A;
+  align-items: center;
+  justify-content: center;
+  border-left: 5vh solid #85FFEF; /* Relative to viewport height */
+  border-right: 5vh solid #85FFEF; /* Relative to viewport height */
+  box-sizing: border-box; /* Ensure padding and borders are included in the width and height calculations */
+}
+
+.slot {
+  width: calc(80vh / 10); /* Ensure slots resize with the board width */
+  height: calc(80vh / 10); /* Ensure slots maintain a square aspect ratio */
+  max-width: calc(80vw / 10); /* Ensure slots don't get too large */
+  max-height: calc(100vh / 8); /* Ensure slots don't get too large */
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: lightgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-size: calc(80vh / 28); /* Responsive font size based on board size */
+  font-family: sans-serif;
+  position: relative;
+}
+
+.slot img {
+  transition: 1s;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ensures images fit within the slots */
+}

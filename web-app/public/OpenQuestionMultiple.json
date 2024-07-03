@@ -1,0 +1,12 @@
+{
+"title": "Schoolschriften",
+"type": 4,
+"question_text": "Hier zie je een paar schoolschriften. Voor welk vak zijn ze bestemd?",
+"hint": "Om deze opdracht op te lossen, hoef je de titel niet te kunnen lezen. Let op de kleuren en de lay-out van de schriften.",
+"strategy": "Let op de kleuren en de lay-out van de schriften.",
+"language": "Arabisch",
+"material_type": "image",
+"material": ["Schoolschriften1.png", "Schoolschriften2.png", "Schoolschriften3.png"] ,
+"difficulty": "mak",
+"solution": ["wiskunde", "biologie", "muziek"]
+}
