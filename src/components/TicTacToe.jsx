@@ -33,163 +33,103 @@
 
 
 
-import React, { useState, useEffect } from 'react';
-import '../styles/TicTacToe.css';
+import React, {useState} from "react"
+import "../styles/TicTacToe.css"
+import ScoreBoardTicTacToe from "../components/ScoreBoardTicTacToe"
+import BoxTicTacToe from "../components/BoxTicTacToe"
+import ResetButtonTicTacToe from "../components/ResetButtonTicTacToe"
+import BoardTicTacToe from "../components/BoardTicTacToe"
 
-
-
-//These are two constants for the cross and circle
-const X_CLASS = 'x';
-const CIRCLE_CLASS = 'circle';
-
-//This is a constance for the winning combinations of the game
-const WINNING_COMBINATIONS = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [2, 4, 6]
-];
 
 
 const TicTacToe = () => {
-  //This is a constance for the state of the game along with turns and winning messages
-  const [board, setBoard] = useState(Array(9).fill(''));
-  const [circleTurn, setCircleTurn] = useState(false);
-  const [winningMessage, setWinningMessage] = useState('');
-  const [showModal, setShowModal] = useState(false);
-  const [selectedCell, setSelectedCell] = useState(null);
-  const [answer, setAnswer] = useState('');
+    /*define all cases in which a game is won 
+    no cases for a draw yet.*/
+    
+    const WIN_CONDITIONS = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+      ]
 
-  useEffect(() => {
-    startGame();
-  }, []);
+    /* initialize all the conditions and variables that we need to keep track of */ 
+    /* initialize empty list for the board */
+    const [board, setBoard] = useState(Array(9).fill(null)) 
+    /* keep track if current player is X */ 
+    const [xPlaying, setXPlaying] = useState(true); 
+    const [scores, setScores]  = useState({xScore: 0, oScore:0})
+    const [gameOver, setGameOver]  = useState(false)
+     
+    /* note that the handleBoxClick body goes pretty far down */ 
+    const handleBoxClick = (boxIdx) => {
+        const updatedBoard = board.map((value, idx) => {
+            if (idx == boxIdx){
+                return xPlaying === true ? "X" : "O"; 
+            } else{
+                return value
+            }
+        })
 
-  // Constant for the starting state of the game 
-  const startGame = () => {
-    setBoard(Array(9).fill(''));
-    setCircleTurn(false);
-    setWinningMessage('');
-    setShowModal(false);
-  };
+        const winner = checkWinner(updatedBoard)
 
-  //Constant for setting a mark of the chosen choice 'x' or 'o'
-  const placeMark = (index) => {
-    setBoard(prevBoard => {
-      const newBoard = [...prevBoard];
-      newBoard[index] = circleTurn ? CIRCLE_CLASS : X_CLASS;
-      return newBoard;
-    });
-  };
- 
-  //Function to check winning combinations 
-  const checkWin = (currentClass, board) => {
-    return WINNING_COMBINATIONS.some(combination => {
-      return combination.every(index => {
-        return board[index] === currentClass;
-      });
-    });
-  };
-
-  //Function to check if the game is a draw
-  const isDraw = (board) => {
-    return board.every(cell => cell === X_CLASS || cell === CIRCLE_CLASS);
-  };
-
-  //Function to end the game upon winning/draw combination and display end message
-  const endGame = (draw) => {
-    if (draw) {
-      setWinningMessage('Draw!');
-    } else {
-      setWinningMessage(`${circleTurn ? "O's" : "X's"} Wins!`);
-    }
-  };
-
-  //Function to handle the clicks on each turn 
-  const handleClick = (index) => {
-    if (!winningMessage && board[index] === '') {
-      setBoard(prevBoard => {
-        const newBoard = [...prevBoard];
-        newBoard[index] = circleTurn ? CIRCLE_CLASS : X_CLASS;
-
-        const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
-        if (checkWin(currentClass, newBoard)) {
-          endGame(false);
-        } else if (isDraw(newBoard)) {
-          endGame(true);
-        } else {
-          setCircleTurn(!circleTurn);
+        /* update the scores if there is a winner */ 
+        if (winner) {
+            if (winner == "O"){
+                let {oScore} = scores; 
+                oScore += 1 
+                setScores({...scores, oScore}) /* keep all the other scores the same except for oScore */
+            } else {
+                let {xScore} = scores; 
+                xScore += 1 
+                setScores({...scores, xScore})
+            }
         }
 
-        return newBoard;
-      });
-    }
-  };
+        /* actually update the board */ 
+        setBoard(updatedBoard);
 
-  //Function to regulate the answer of the choice to handle the answer 
-  const handleAnswerSubmit = () => {
-    if (answer.trim() && selectedCell !== null) {
-      setBoard(prevBoard => {
-        const newBoard = [...prevBoard];
-        newBoard[selectedCell] = circleTurn ? CIRCLE_CLASS : X_CLASS;
+        /* set opposite of X playing */ 
+        setXPlaying(!xPlaying); 
 
-        const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
-        if (checkWin(currentClass, newBoard)) {
-          endGame(false);
-        } else if (isDraw(newBoard)) {
-          endGame(true);
-        } else {
-          setCircleTurn(!circleTurn);
+    } /* end of handleBoxClick */ 
+
+    const checkWinner = (board) => {
+        /* go through all possible win conditions. For an ultimate tictactoe, this could be done by checking each field where a turn is done */ 
+        for (let i = 0; i < WIN_CONDITIONS.length; i++){
+            const [x,y,z] = WIN_CONDITIONS[i];
+
+            if (board[x] && board[x] === board[y] && board[y] === board[z]){
+                setGameOver(true)
+                return board[x]
+            }
         }
-
-        return newBoard;
-      });
-
-      setShowModal(false);
-      setAnswer('');
     }
-  };
 
-  return (
-    <div id="gameContainer">
-      <h1>Tic-Tac-Toe</h1>
-      <div id="whoseTurn">{circleTurn ? "Circle's turn" : "X's turn"}</div>
-      <div id="gameBoard">
-        {board.map((cell, index) => (
-          <div
-            key={index}
-            className={`cell ${cell}`}
-            onClick={() => handleClick(index)}
-          ></div>
-        ))}
-      </div>
-      {winningMessage && (
-        <div id="winningMessage" className="show">
-          <div data-winning-message-text>{winningMessage}</div>
+    const resetBoard = () => {
+        setGameOver(false); 
+        setBoard(Array(9).fill(null))
+    }
+
+
+    return(
+        <div>
+            <div className="page-header">
+                <h1>A simple game of tictactoe</h1>
+            </div>
+            <div>
+            <ScoreBoardTicTacToe scores = {scores} xPlaying = {xPlaying}/>
+            {/* onclick gives check if gameOver if so, reset the board, if not continue with handleBoxClick function*/}
+            <BoardTicTacToe board = {board} onClick={gameOver ? resetBoard : handleBoxClick} /> {/* render the board */}
+            {/* this could simply be a button honestly... */}
+            <ResetButtonTicTacToe resetBoard ={resetBoard}/>
+            </div>
         </div>
-      )}
-      <button id="restartButton" onClick={startGame}>Restart</button>
-      {showModal && (
-        <div id="questionModal" className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={() => setShowModal(false)}>&times;</span>
-            <p>Answer the question:</p>
-            <input
-              type="text"
-              id="answerInput"
-              value={answer}
-              onChange={(e) => setAnswer(e.target.value)}
-            />
-            <button id="submitAnswer" onClick={handleAnswerSubmit}>Submit</button>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+    )
 }
 
 export default TicTacToe;
-

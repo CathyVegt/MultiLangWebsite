@@ -1,5 +1,3 @@
-
-
 /*
  * Copyright (c) 2024, MSDT group6
  * All rights reserved.
@@ -31,16 +29,14 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+import React from 'react'
+import "../styles/ResetButtonTicTacToe.css"
 
-
-
-/* For easier box scaling/sizing */ 
-
-*{
-	box-sizing: border-box; 
+const ResetButtonTicTacToe = ({resetBoard}) => {
+    return (
+        <button className='reset-button' onClick={resetBoard}>Reset</button>
+    )
 }
 
+export default ResetButtonTicTacToe
 
-body{
-	margin: 0; 
-} 

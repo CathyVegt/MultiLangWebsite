@@ -1,5 +1,3 @@
-
-
 /*
  * Copyright (c) 2024, MSDT group6
  * All rights reserved.
@@ -31,16 +29,17 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+import React from 'react'
+import "../styles/BoxTicTacToe.css"
+
+const BoxTicTacToe = ({value, onClick}) => {
+    /* if/else for the style of the box if x or o*/ 
+    const style = value === "X" ? "box x" : "box o"
 
 
-
-/* For easier box scaling/sizing */ 
-
-*{
-	box-sizing: border-box; 
+    return (
+      <button className={style} onClick={onClick}>{value}</button>
+    )
 }
 
-
-body{
-	margin: 0; 
-} 
+export default BoxTicTacToe;

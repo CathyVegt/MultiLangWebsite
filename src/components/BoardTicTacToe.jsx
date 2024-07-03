@@ -1,5 +1,3 @@
-
-
 /*
  * Copyright (c) 2024, MSDT group6
  * All rights reserved.
@@ -31,16 +29,22 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+import React from 'react'
 
+import BoxTicTacToe from './BoxTicTacToe'
+import "../styles/BoardTicTacToe.css"
 
+/* the arangement of boxes is done in the .css file */ 
 
-/* For easier box scaling/sizing */ 
-
-*{
-	box-sizing: border-box; 
+const BoardTicTacToe = ({board, onClick}) => {
+    return (
+        <div className='boardTicTacToe'>
+            {/* map the values for the board to boxes  */}
+            {board.map((value, idx) => {
+                return <BoxTicTacToe value={value} onClick={() => value === null && onClick(idx)} /> /* value === null ensures you can't update previous alues */
+            })}
+        </div>
+    )
 }
 
-
-body{
-	margin: 0; 
-} 
+export default BoardTicTacToe;

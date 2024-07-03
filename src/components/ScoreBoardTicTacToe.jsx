@@ -1,5 +1,3 @@
-
-
 /*
  * Copyright (c) 2024, MSDT group6
  * All rights reserved.
@@ -31,16 +29,20 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+import React from "react"
+import "../styles/ScoreBoardTicTacToe.css"
 
-
-
-/* For easier box scaling/sizing */ 
-
-*{
-	box-sizing: border-box; 
+const ScoreBoardTicTacToe = ({scores, xPlaying}) => {
+    /* extract xscores and o scores */ 
+    const {xScore, oScore} = scores; 
+    
+    return (
+        <div className="scoreboard"> 
+            <span className={`score x-score ${!xPlaying && "inactive"}`}> X - {xScore} </span>
+            <span className={`score o-score ${xPlaying && "inactive"}`}> O - {oScore} </span>
+        </div>
+    )
 }
 
+export default ScoreBoardTicTacToe; 
 
-body{
-	margin: 0; 
-} 
